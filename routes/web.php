@@ -29,8 +29,19 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/modify/{ouvrage}', [GestionnaireController::class, 'modifyOuvrage'])->name('modify');
             Route::post('/modify/{ouvrage}', [GestionnaireController::class, 'doModifyOuvrage']);
 
-            Route::delete('/show', [GestionnaireController::class, 'delete']);
+            Route::delete('/show', [GestionnaireController::class, 'deleteOuvrage']);
             Route::get('/show', [GestionnaireController::class, 'showAllOuvrage'])->name('show');
+        });
+
+        Route::prefix('/etablissement')->name('etablissement.')->group(function () {
+            Route::get('/create', [GestionnaireController::class, 'createEtab'])->name('create');
+            Route::post('/create', [GestionnaireController::class, 'doCreateEtab']);
+
+            Route::get('/modify/{etablissement}', [GestionnaireController::class, 'modifyEtab'])->name('modify');
+            Route::post('/modify/{etablissement}', [GestionnaireController::class, 'doModifyEtab']);
+
+            Route::delete('/show', [GestionnaireController::class, 'deleteEtab']);
+            Route::get('/show', [GestionnaireController::class, 'showAllEtab'])->name('show');
         });
     });
 });

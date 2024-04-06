@@ -41,7 +41,7 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label for="options">Langue</label>
-                        <select name="langue" id="options" class="form-control">
+                        <select name="typeEtab" id="options" class="form-control">
                             @foreach ($langues as $option)
                                 <option value="{{$option->codelangue}}" {{$ouvrage->codelangue === $option->codelangue ? 'select' : '' }} >{{$option->nom}}</option>
                             @endforeach

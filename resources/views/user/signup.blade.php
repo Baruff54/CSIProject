@@ -101,7 +101,7 @@
                     </div>
                 </div><br>
                 <div class="form-group text-center">
-                    <button class="btn btn-primary">Connexion</button>
+                    <button class="btn btn-primary">S'inscrire</button>
                 </div>
             </form>
         </div>

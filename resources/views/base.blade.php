@@ -29,9 +29,8 @@
                                 Gestion
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{{ Route('gestionnaire.ouvrage.show') }}">Voir les ouvrages</a></li>
-                                <li><a class="dropdown-item" href="{{ Route('gestionnaire.ouvrage.create') }}">Ajouter un ouvrage</a></li>
-{{--                                <li><a class="dropdown-item" href="{{ Route('dashboard.option') }}">Les options</a></li>--}}
+                                <li><a class="dropdown-item" href="{{ Route('gestionnaire.ouvrage.show') }}">Les ouvrages</a></li>
+                                <li><a class="dropdown-item" href="{{ Route('gestionnaire.etablissement.show') }}">Les établissements</a></li>
                             </ul>
                         </li>
                     @endif

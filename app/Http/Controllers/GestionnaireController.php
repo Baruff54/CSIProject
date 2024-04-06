@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Etablissement;
 use App\Models\Gestionnaire;
 use App\Models\Langue;
 use App\Models\Ouvrage;
 use Illuminate\Http\Request;
 
 class GestionnaireController extends Controller {
+
+    // Gestion Ouvrage
+
     public function showAllOuvrage() {
         return view('dashboard.ouvrage.show', ['ouvrages' => Ouvrage::all()]);
     }
@@ -29,10 +33,10 @@ class GestionnaireController extends Controller {
         return view('dashboard.ouvrage.create', ['langues' => Langue::all()]);
     }
 
-    public function delete(Request $request) {
+    public function deleteOuvrage(Request $request) {
         $ouvrage = Ouvrage::find($request->input('idOuvrage'));
         $ouvrage->delete();
-        return back()->with('success', 'Action effectué avec succès.');
+        return back()->with('success', 'Suppression effectué avec succès.');
     }
 
     public function modifyOuvrage(Ouvrage $ouvrage) {
@@ -48,5 +52,71 @@ class GestionnaireController extends Controller {
         $ouvrage->save();
 
         return redirect()->route('gestionnaire.ouvrage.show');
+    }
+
+    // Gestion établissement
+
+    public function showAllEtab() {
+        return view('dashboard.etablissement.show', ['etablissements' => Etablissement::all()]);
+    }
+
+    public function createEtab() {
+        $type = [
+            "universite" => 'Université',
+            "lycee_general" => 'Lycée général',
+            "lycee_professionnel" => 'Lycée professionnel',
+            "college" => 'Collège',
+            "ecole_primaire" => 'Ecole primaire',
+            "ecole_maternelle" => 'Ecole maternelle',
+            "medico_sociaux" => 'Médico sociaux',
+            "penitentiaire" => 'Pénitentiaire',
+        ];
+
+        return view('dashboard.etablissement.create', ['typeEtab' => $type]);
+    }
+
+    public function doCreateEtab(Request $request) {
+        $etablissement = new Etablissement();
+
+        $etablissement->nom = $request->input('nom');
+        $etablissement->typeetablissement = $request->input('typeEtablissement');
+        $etablissement->ville = $request->input('ville');
+        $etablissement->adresse = $request->input('adresse');
+        $etablissement->nombrevoeux = 0;
+
+        $etablissement->save();
+
+        return back()->with('success', 'Création effectué avec succès.');
+    }
+
+    public function deleteEtab(Request $request) {
+        $etablissement = Etablissement::find($request->input('idEtablissement'));
+        $etablissement->delete();
+        return back()->with('success', 'Suppression effectué avec succès.');
+    }
+
+    public function modifyEtab(Etablissement $etablissement) {
+        $type = [
+            "universite" => 'Université',
+            "lycee_general" => 'Lycée général',
+            "lycee_professionnel" => 'Lycée professionnel',
+            "college" => 'Collège',
+            "ecole_primaire" => 'Ecole primaire',
+            "ecole_maternelle" => 'Ecole maternelle',
+            "medico_sociaux" => 'Médico sociaux',
+            "penitentiaire" => 'Pénitentiaire',
+        ];
+        return view('dashboard.etablissement.modify', ['etablissement' => $etablissement, 'typeEtab' => $type]);
+    }
+
+    public function doModifyEtab(Etablissement $etablissement, Request $request) {
+        $etablissement->nom = $request->input('nom');
+        $etablissement->typeetablissement = $request->input('typeEtab');
+        $etablissement->ville = $request->input('ville');
+        $etablissement->adresse = $request->input('adresse');
+
+        $etablissement->save();
+
+        return redirect()->route('gestionnaire.etablissement.show')->with('success', 'La modification à bien été effectué.');
     }
 }

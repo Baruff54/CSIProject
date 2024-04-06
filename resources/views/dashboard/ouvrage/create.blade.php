@@ -51,7 +51,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="form-group text-center">
+                <div class="form-group text-center m-3">
                     <button class="btn btn-primary">Ajouter</button>
                 </div>
             </div>
